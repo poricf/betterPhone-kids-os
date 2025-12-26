@@ -255,10 +255,19 @@ const App = () => {
   const isLocked = currentView === AppView.LOCK_SCREEN;
 
   return (
-    <div className="w-full h-[100dvh] flex items-center justify-center bg-[#1a1a1a] p-2 sm:p-4 sm:bg-[#f0f0f0] font-sans select-none perspective-[1000px]">
+    <div className="w-full h-[100dvh] flex items-center justify-center bg-[#1a1a1a] p-4 sm:p-4 sm:bg-[#f0f0f0] font-sans select-none perspective-[1000px] overflow-hidden">
       
       {/* PHONE HARDWARE SHELL - Samsung S24 Ultra Style */}
-      <div className="relative w-full min-w-[320px] max-w-[390px] aspect-[390/844] max-h-[100dvh] bg-[#1a1a1a] rounded-[20px] sm:rounded-[24px] sm:w-[390px] sm:h-[844px] shadow-[0_0_0_2px_#333,0_0_0_4px_#111,0_20px_50px_-10px_rgba(0,0,0,0.6)] ring-1 ring-white/10 transition-all duration-500 overflow-hidden">
+      {/* Height is calculated to maintain 390:844 ratio while fitting in viewport */}
+      <div 
+        className="relative bg-[#1a1a1a] rounded-[20px] sm:rounded-[24px] shadow-[0_0_0_2px_#333,0_0_0_4px_#111,0_20px_50px_-10px_rgba(0,0,0,0.6)] ring-1 ring-white/10 transition-all duration-500 overflow-hidden"
+        style={{
+          width: 'min(calc(100vw - 32px), 390px, calc((100dvh - 32px) * 390 / 844))',
+          height: 'min(calc(100dvh - 32px), 844px, calc((100vw - 32px) * 844 / 390))',
+          maxWidth: '390px',
+          maxHeight: '844px',
+        }}
+      >
         
         {/* Physical Buttons - Power & Volume */}
         <div className="absolute top-[15%] -right-[3px] w-[3px] h-10 bg-[#2a2a2a] rounded-r-sm z-[200]"></div>
