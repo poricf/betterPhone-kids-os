@@ -1,0 +1,9 @@
+{
+  "name": "BetterPhone Kid OS",
+  "description": "A high-fidelity simulation of the BetterPhone operating system from the child's perspective, featuring quest modes, tamper-proof safety, and AI storytelling.",
+  "requestFramePermissions": [
+    "microphone",
+    "geolocation",
+    "camera"
+  ]
+}
