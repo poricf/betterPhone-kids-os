@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Lock, Clock, X, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -6,10 +6,47 @@ interface LockedViewProps {
   onClose: () => void;
   appName: string;
   reason?: 'TIME_LIMIT' | 'STUDY_MODE';
+  nextAllowanceTime?: number;
 }
 
-export const LockedView: React.FC<LockedViewProps> = ({ onClose, appName, reason = 'TIME_LIMIT' }) => {
+export const LockedView: React.FC<LockedViewProps> = ({ onClose, appName, reason = 'TIME_LIMIT', nextAllowanceTime }) => {
   const isStudy = reason === 'STUDY_MODE';
+  const [timeRemaining, setTimeRemaining] = useState<string>('');
+
+  // Calculate and update countdown timer
+  useEffect(() => {
+    if (isStudy || !nextAllowanceTime) {
+      setTimeRemaining('');
+      return;
+    }
+
+    const updateTimer = () => {
+      const now = Date.now();
+      const diff = nextAllowanceTime - now;
+
+      if (diff <= 0) {
+        setTimeRemaining('Available now!');
+        return;
+      }
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      if (hours > 0) {
+        setTimeRemaining(`${hours}h ${minutes}m ${seconds}s`);
+      } else if (minutes > 0) {
+        setTimeRemaining(`${minutes}m ${seconds}s`);
+      } else {
+        setTimeRemaining(`${seconds}s`);
+      }
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+
+    return () => clearInterval(interval);
+  }, [nextAllowanceTime, isStudy]);
 
   return (
     <div className={`h-full w-full flex flex-col items-center justify-center p-8 text-center relative z-50 backdrop-blur-xl transition-colors duration-500 ${isStudy ? 'bg-indigo-900/95 text-white' : 'bg-white/80 text-slate-800'}`}>

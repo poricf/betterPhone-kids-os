@@ -97,6 +97,27 @@ const App = () => {
   // Lock Reason State to differentiate UI
   const [lockReason, setLockReason] = useState<'TIME_LIMIT' | 'STUDY_MODE'>('TIME_LIMIT');
   const [lockedAppName, setLockedAppName] = useState('Restricted App');
+  
+  // Timer for locked apps - get from localStorage or set default (1 hour from now)
+  const getNextAllowanceTime = (appName: string): number => {
+    const stored = localStorage.getItem(`nextAllowance_${appName}`);
+    if (stored) {
+      const time = parseInt(stored, 10);
+      // If time has passed, set new allowance (1 hour from now)
+      if (Date.now() > time) {
+        const newTime = Date.now() + 60 * 60 * 1000; // 1 hour
+        localStorage.setItem(`nextAllowance_${appName}`, newTime.toString());
+        return newTime;
+      }
+      return time;
+    }
+    // First time - set 1 hour from now
+    const newTime = Date.now() + 60 * 60 * 1000; // 1 hour
+    localStorage.setItem(`nextAllowance_${appName}`, newTime.toString());
+    return newTime;
+  };
+  
+  const [nextAllowanceTime, setNextAllowanceTime] = useState<number>(0);
 
   // Offline Cache Logic
   const [locationBuffer, setLocationBuffer] = useState<number>(0);
@@ -178,6 +199,7 @@ const App = () => {
     if (app.isLocked) {
       setLockReason('TIME_LIMIT');
       setLockedAppName(app.name);
+      setNextAllowanceTime(getNextAllowanceTime(app.name));
       setCurrentView(AppView.LOCKED_APP);
       return;
     }
