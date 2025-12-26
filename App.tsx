@@ -362,7 +362,7 @@ const App = () => {
 
                 {currentView === AppView.LOCKED_APP && (
                   <motion.div key="locked" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="h-full w-full">
-                    <LockedView appName={lockedAppName} onClose={goHome} reason={lockReason} />
+                    <LockedView appName={lockedAppName} onClose={goHome} reason={lockReason} nextAllowanceTime={nextAllowanceTime} />
                   </motion.div>
                 )}
 
