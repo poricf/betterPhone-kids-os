@@ -255,17 +255,17 @@ const App = () => {
   const isLocked = currentView === AppView.LOCK_SCREEN;
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-[#f0f0f0] p-4 font-sans select-none perspective-[1000px]">
+    <div className="w-full h-[100dvh] flex items-stretch sm:items-center justify-center bg-black sm:bg-[#f0f0f0] p-0 sm:p-4 font-sans select-none perspective-[1000px] pt-[env(safe-area-inset-top)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)]">
       
       {/* PHONE HARDWARE SHELL - Samsung S24 Ultra Style */}
-      <div className="relative w-[390px] h-[844px] bg-[#1a1a1a] rounded-[24px] shadow-[0_0_0_2px_#333,0_0_0_5px_#111,0_20px_50px_-10px_rgba(0,0,0,0.6)] ring-1 ring-white/10 transition-all duration-500 overflow-hidden">
+      <div className="relative w-full h-full sm:w-[390px] sm:h-[844px] max-w-[100vw] max-h-full bg-[#1a1a1a] rounded-none sm:rounded-[24px] shadow-none sm:shadow-[0_0_0_2px_#333,0_0_0_5px_#111,0_20px_50px_-10px_rgba(0,0,0,0.6)] ring-0 sm:ring-1 ring-white/10 transition-all duration-500 overflow-hidden">
         
         {/* Physical Buttons */}
-        <div className="absolute top-32 -right-[6px] w-[4px] h-12 bg-[#2a2a2a] rounded-r-md z-0 shadow-sm"></div>
-        <div className="absolute top-52 -right-[6px] w-[4px] h-20 bg-[#2a2a2a] rounded-r-md z-0 shadow-sm"></div>
+        <div className="hidden sm:block absolute top-32 -right-[6px] w-[4px] h-12 bg-[#2a2a2a] rounded-r-md z-0 shadow-sm"></div>
+        <div className="hidden sm:block absolute top-52 -right-[6px] w-[4px] h-20 bg-[#2a2a2a] rounded-r-md z-0 shadow-sm"></div>
 
         {/* Inner Bezel / Screen Container */}
-        <div className="w-full h-full bg-black rounded-[20px] overflow-hidden relative border-[3px] border-black">
+        <div className="w-full h-full bg-black rounded-none sm:rounded-[20px] overflow-hidden relative border-[3px] border-black">
           
           {/* WALLPAPER LAYER */}
           <div className="absolute inset-0 z-0 bg-black">
