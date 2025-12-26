@@ -18,7 +18,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({ isOfflineMode, lightMode =
   const textColor = lightMode ? 'text-white' : 'text-slate-900';
 
   return (
-    <div className={`w-full h-10 px-6 flex items-center justify-between text-sm font-medium z-50 select-none absolute top-1 left-0 right-0 transition-colors duration-300 ${isOfflineMode ? 'bg-amber-100/90 backdrop-blur-sm text-amber-800' : `bg-transparent ${textColor}`}`}>
+    <div className={`w-full h-10 px-5 flex items-center justify-between text-sm font-medium z-50 select-none shrink-0 transition-colors duration-300 ${isOfflineMode ? 'bg-amber-100/90 backdrop-blur-sm text-amber-800' : `bg-transparent ${textColor}`}`}>
       <div className="flex items-center gap-2 w-24">
         <span>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
         {isOfflineMode && <span className="font-bold text-[10px] bg-amber-200 px-1 rounded">OFFLINE</span>}

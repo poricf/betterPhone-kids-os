@@ -1,6 +1,4 @@
 
-import type { ElementType } from 'react';
-
 export enum AppView {
   LOCK_SCREEN = 'LOCK_SCREEN',
   HOME = 'HOME',
@@ -48,7 +46,7 @@ export interface Quest {
 export interface AppIcon {
   id: string;
   name: string;
-  icon: ElementType;
+  icon: React.ElementType;
   color: string;
   view: AppView;
   isLocked?: boolean;

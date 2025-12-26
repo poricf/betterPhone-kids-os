@@ -1,6 +1,6 @@
 import React from 'react';
 import { Quest } from '../types';
-import { Check, Plus } from 'lucide-react';
+import { Check, Circle, Plus } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { motion } from 'framer-motion';
 
@@ -75,7 +75,7 @@ export const QuestView: React.FC<QuestViewProps> = ({ quests, onToggleQuest }) =
   );
 };
 
-const TaskItem: React.FC<{ quest: Quest; onClick: () => void }> = ({ quest, onClick }) => (
+const TaskItem = ({ quest, onClick }: { quest: Quest, onClick: () => void }) => (
   <motion.div 
     layout
     initial={{ opacity: 0, y: 10 }}
