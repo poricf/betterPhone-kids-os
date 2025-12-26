@@ -1,21 +1,26 @@
 /* Global styles for BetterPhone Kid OS */
 
-html,
-body,
-#root {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  overflow-x: hidden;
-}
-
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 
+/* Shake animation for locked apps */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.active\:shake:active {
+  animation: shake 0.3s ease-in-out;
+}
